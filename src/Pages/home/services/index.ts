@@ -5,7 +5,7 @@ export const useTaskList = () => {
   const loadTask = ({ taskSet }: ILoadTask) => {
     const myTask: any = localStorage.getItem("@Task") || [];
 
-    taskSet(JSON.parse(myTask));
+    taskSet(JSON.parse(myTask) || "[]");
   };
 
   const onSubmitTask = ({ data, reset, taskSet }: IOnSubmitTask) => {
@@ -18,7 +18,7 @@ export const useTaskList = () => {
 
     const myTask: any = localStorage.getItem("@Task");
 
-    let savedTask = JSON.parse(myTask) || [];
+    let savedTask = JSON.parse(myTask) || "[]";
 
     const sendTask = [...savedTask, newTask];
 
