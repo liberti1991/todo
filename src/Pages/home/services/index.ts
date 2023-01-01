@@ -3,9 +3,13 @@ import { IDeleteTask, ILoadTask, IOnSubmitTask } from "../interfaceTask";
 
 export const useTaskList = () => {
   const loadTask = ({ taskSet }: ILoadTask) => {
-    const myTask: any = localStorage.getItem("@Task") || [];
+    const myTask: any = localStorage.getItem("@Task");
 
-    taskSet(JSON.parse(myTask) || [""]);
+    if (myTask === null) {
+      return taskSet([]);
+    } else {
+      taskSet(JSON.parse(myTask) || []);
+    }
   };
 
   const onSubmitTask = ({ data, reset, taskSet }: IOnSubmitTask) => {
