@@ -6,11 +6,10 @@ import { BiPencil, BiTrash } from "react-icons/bi";
 
 import { useTaskList } from "./services";
 
-import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./stylesMain";
-
 import { Modal } from "../../components/modal";
 import { ISubmitTask, ITask } from "./interfaceTask";
 import { schemaTodo } from "./schemaTodo";
+import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./stylesMain";
 import { UpdateTask } from "./update";
 
 export const Home = () => {
