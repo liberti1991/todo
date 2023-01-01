@@ -4,13 +4,15 @@ import { useForm } from "react-hook-form";
 
 import { BiPencil, BiTrash } from "react-icons/bi";
 
+import { schemaTodo } from "./schemaTodo";
 import { useTaskList } from "./services";
+import { UpdateTask } from "./update";
 
 import { Modal } from "../../components/modal";
-import { ISubmitTask, ITask } from "./interfaceTask";
-import { schemaTodo } from "./schemaTodo";
+
 import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./stylesMain";
-import { UpdateTask } from "./update";
+
+import { ISubmitTask, ITask } from "./interfaceTask";
 
 export const Home = () => {
   const {

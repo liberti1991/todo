@@ -1,9 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { ISubmitTask, IUpdateTask } from "../interfaceTask";
+
 import { schemaTodo } from "../schemaTodo";
 import { useTaskList } from "../services";
+
 import { ContainerInput, InputSubmit } from "../stylesMain";
+
+import { ISubmitTask, IUpdateTask } from "../interfaceTask";
 
 export const UpdateTask = ({ captureTask, task, taskSet, funcClose }: IUpdateTask) => {
   const { onSubmitUpdateTask } = useTaskList();
