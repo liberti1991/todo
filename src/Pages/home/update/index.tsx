@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { schemaTodo } from "../schemaTodo";
 import { useTaskList } from "../services";
 
-import { ContainerInput, InputSubmit } from "../stylesMain";
+import { ContainerInput, InputSubmit } from "../StylesMain";
 
 import { ISubmitTask, IUpdateTask } from "../interfaceTask";
 

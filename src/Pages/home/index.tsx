@@ -10,7 +10,7 @@ import { UpdateTask } from "./update";
 
 import { Modal } from "../../components/modal";
 
-import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./stylesMain";
+import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./StylesMain";
 
 import { ISubmitTask, ITask } from "./interfaceTask";
 
