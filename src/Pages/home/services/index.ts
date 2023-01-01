@@ -1,4 +1,6 @@
+import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
+
 import { IDeleteTask, ILoadTask, IOnSubmitTask } from "../interfaceTask";
 
 export const useTaskList = () => {
@@ -29,6 +31,8 @@ export const useTaskList = () => {
     localStorage.setItem("@Task", JSON.stringify(sendTask));
     taskSet([...savedTask, newTask]);
 
+    toast.success("Tarefa criada com sucesso!");
+
     reset();
   };
 
@@ -38,6 +42,10 @@ export const useTaskList = () => {
     });
 
     taskSet(filterTask);
+
+    toast.warn("Tarefa Removida com Sucesso!", {
+      icon: "☢️",
+    });
 
     localStorage.setItem("@Task", JSON.stringify(filterTask));
   };

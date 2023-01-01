@@ -1,5 +1,5 @@
 export interface IModal {
-  handleModal(): void;
+  funcClose(): void;
   children: React.ReactNode;
   modal: boolean;
   title: string;

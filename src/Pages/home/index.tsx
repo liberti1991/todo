@@ -1,18 +1,30 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import { BiPencil, BiTrash } from "react-icons/bi";
-import { ISubmitTask, ITask } from "./interfaceTask";
+
 import { useTaskList } from "./services";
-import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./StylesMain";
+
+import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from "./stylesMain";
+
+import { Modal } from "../../components/modal";
+import { ISubmitTask, ITask } from "./interfaceTask";
+import { schemaTodo } from "./schemaTodo";
 
 export const Home = () => {
-  const { handleSubmit, register, reset } = useForm<ISubmitTask>({});
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors },
+  } = useForm<ISubmitTask>({ resolver: yupResolver(schemaTodo) });
   const { loadTask, onSubmitTask, deleteTask } = useTaskList();
 
   const [task, taskSet] = useState<ITask[]>([]);
 
-  // const [modal, modalSet] = useState<boolean>(false);
-  // const handleModal = () => modalSet(!modal);
+  const [modal, modalSet] = useState<boolean>(false);
+  const handleModal = () => modalSet(!modal);
 
   console.log(task);
 
@@ -24,51 +36,60 @@ export const Home = () => {
 
   return (
     <ContainerMain>
-      <div>
-        <h2>O que você vai fazer?</h2>
+      <section>
+        <div>
+          <h2>O que você vai fazer?</h2>
 
-        <form
-          onSubmit={handleSubmit((data) => {
-            onSubmitTask({ data, reset, taskSet });
-          })}
-        >
-          <ContainerInput>
-            <input id="title" placeholder="Título da tarefa" {...register("title")} />
-            <label htmlFor="title">Título:</label>
-          </ContainerInput>
+          <form
+            onSubmit={handleSubmit((data) => {
+              onSubmitTask({ data, reset, taskSet });
+            })}
+          >
+            <ContainerInput>
+              <input id="title" placeholder="Título da tarefa" {...register("title")} />
+              <label htmlFor="title">Título:</label>
+              <span>{errors?.title?.message}</span>
+            </ContainerInput>
 
-          <ContainerInput>
-            <textarea
-              id="description"
-              rows={4}
-              placeholder="Descrição da tarefa"
-              {...register("description")}
-            />
-            <label htmlFor="description">Descrição:</label>
-          </ContainerInput>
-          <InputSubmit type="submit" value="Criar Tarefa" />
-        </form>
-      </div>
-
-      <div>
-        <h3>Lista de Tarefas</h3>
-
-        {task.length === 0 && <p>Não tem tarefas cadastradas</p>}
-
-        {task.map((item: { id: any; title: any }) => (
-          <ContainerTaskList key={item.id}>
-            <h4>{item.title}</h4>
-            <div>
-              <BiPencil
-                onClick={() => {
-                  // modalSet(true);
-                }}
+            <ContainerInput>
+              <textarea
+                id="description"
+                rows={4}
+                placeholder="Descrição da tarefa"
+                {...register("description")}
               />
-              <BiTrash onClick={() => deleteTask({ id: item.id, task, taskSet })} />
-            </div>
-          </ContainerTaskList>
-        ))}
-      </div>
+              <label htmlFor="description">Descrição:</label>
+              <span>{errors?.description?.message}</span>
+            </ContainerInput>
+
+            <InputSubmit type="submit" value="Criar Tarefa" />
+          </form>
+        </div>
+
+        <div>
+          <h4>Lista de Tarefas</h4>
+
+          {task.length === 0 && <p>Não tem tarefas cadastradas</p>}
+
+          {task.map((item) => (
+            <ContainerTaskList key={item.id}>
+              <p>{item.title}</p>
+              <div>
+                <BiPencil
+                  onClick={() => {
+                    modalSet(true);
+                  }}
+                />
+                <BiTrash onClick={() => deleteTask({ id: item.id, task, taskSet })} />
+              </div>
+            </ContainerTaskList>
+          ))}
+        </div>
+      </section>
+
+      {modal && (
+        <Modal title="Editar tarefa" modal={modal} funcClose={handleModal} children={<p>oi</p>} />
+      )}
     </ContainerMain>
   );
 };

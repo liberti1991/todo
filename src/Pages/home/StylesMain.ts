@@ -5,16 +5,25 @@ export const ContainerMain = styled.div`
   flex-direction: column;
   max-width: 400px;
   margin: 0 auto;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 10px;
   margin-top: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+
+  > section {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    h4 {
+      border-bottom: 1px solid #d4d4d4;
+      margin-bottom: 6px;
+    }
+  }
 `;
 
 export const ContainerInput = styled.div`
   position: relative;
-  margin: 15px 0;
+  margin: 10px 0;
 
   > label {
     font-size: 11px;
@@ -58,6 +67,11 @@ export const ContainerInput = styled.div`
       border-color: #61dafb;
     }
   }
+
+  > span {
+    color: red;
+    font-size: 12px;
+  }
 `;
 
 export const InputSubmit = styled.input`
@@ -69,6 +83,7 @@ export const InputSubmit = styled.input`
   transition: 0.5s;
   border-radius: 5px;
   padding: 10px;
+  margin-bottom: 10px;
 
   :hover {
     background-color: #fff;
@@ -80,9 +95,13 @@ export const ContainerTaskList = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px 5px;
+  padding: 0 10px 5px;
   border-bottom: 1px solid #d4d4d4;
   margin-bottom: 5px;
+
+  > p {
+    font-size: 14px;
+  }
 
   > div {
     display: flex;
