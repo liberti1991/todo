@@ -10,7 +10,7 @@ export const useTaskList = () => {
     if (myTask === null) {
       return taskSet([]);
     } else {
-      taskSet(JSON.parse(myTask) || []);
+      taskSet(JSON.parse(myTask));
     }
   };
 
