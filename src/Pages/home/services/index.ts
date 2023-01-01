@@ -18,7 +18,7 @@ export const useTaskList = () => {
 
     const myTask: any = localStorage.getItem("@Task");
 
-    let savedTask = JSON.parse(myTask) || "[]";
+    let savedTask = JSON.parse(myTask) || [];
 
     const sendTask = [...savedTask, newTask];
 
