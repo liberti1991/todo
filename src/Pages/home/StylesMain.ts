@@ -37,7 +37,6 @@ export const ContainerInput = styled.div`
 
   > input {
     font-size: 13px;
-    color: #555;
     width: 100%;
     padding: 10px 10px 6px;
     border-radius: 5px;

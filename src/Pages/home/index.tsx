@@ -11,6 +11,7 @@ import { ContainerInput, ContainerMain, ContainerTaskList, InputSubmit } from ".
 import { Modal } from "../../components/modal";
 import { ISubmitTask, ITask } from "./interfaceTask";
 import { schemaTodo } from "./schemaTodo";
+import { UpdateTask } from "./update";
 
 export const Home = () => {
   const {
@@ -25,8 +26,7 @@ export const Home = () => {
 
   const [modal, modalSet] = useState<boolean>(false);
   const handleModal = () => modalSet(!modal);
-
-  console.log(task);
+  const [captureTask, captureTaskSet] = useState<ITask>();
 
   useEffect(() => {
     loadTask({ taskSet });
@@ -77,6 +77,7 @@ export const Home = () => {
               <div>
                 <BiPencil
                   onClick={() => {
+                    captureTaskSet(item);
                     modalSet(true);
                   }}
                 />
@@ -88,7 +89,19 @@ export const Home = () => {
       </section>
 
       {modal && (
-        <Modal title="Editar tarefa" modal={modal} funcClose={handleModal} children={<p>oi</p>} />
+        <Modal
+          title="Editar tarefa"
+          modal={modal}
+          funcClose={handleModal}
+          children={
+            <UpdateTask
+              captureTask={captureTask}
+              task={task}
+              taskSet={taskSet}
+              funcClose={handleModal}
+            />
+          }
+        />
       )}
     </ContainerMain>
   );

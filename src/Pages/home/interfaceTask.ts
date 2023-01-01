@@ -21,6 +21,17 @@ export interface IOnSubmitTask {
   taskSet(newTask: ITask[]): void;
 }
 
+export interface IUpdateTask {
+  task: ITask[];
+  taskSet(updateTaskItems: ITask[]): void;
+  captureTask: ITask | undefined;
+  funcClose(): void;
+}
+
+export interface IOnSubmitUpdateTask extends IUpdateTask {
+  data: ISubmitTask;
+}
+
 export interface IDeleteTask extends IId {
   task: ITask[];
   taskSet(filterTask: ITask[]): void;

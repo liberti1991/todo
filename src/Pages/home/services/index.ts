@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
 
-import { IDeleteTask, ILoadTask, IOnSubmitTask } from "../interfaceTask";
+import { IDeleteTask, ILoadTask, IOnSubmitTask, IOnSubmitUpdateTask } from "../interfaceTask";
 
 export const useTaskList = () => {
   const loadTask = ({ taskSet }: ILoadTask) => {
@@ -36,6 +36,32 @@ export const useTaskList = () => {
     reset();
   };
 
+  const onSubmitUpdateTask = ({
+    data,
+    task,
+    taskSet,
+    captureTask,
+    funcClose,
+  }: IOnSubmitUpdateTask) => {
+    const updateTaskItems = {
+      id: captureTask!.id,
+      title: data.title,
+      description: data.description,
+    };
+
+    const filterTaskItems = task.filter((item) => {
+      return item.id !== captureTask!.id;
+    });
+
+    const sendTask = [...filterTaskItems, updateTaskItems];
+    localStorage.setItem("@Task", JSON.stringify(sendTask));
+
+    taskSet([...filterTaskItems, updateTaskItems]);
+
+    toast.success("Tarefa atualizada com sucesso!");
+    funcClose();
+  };
+
   const deleteTask = ({ id, task, taskSet }: IDeleteTask) => {
     let filterTask = task.filter((item) => {
       return item.id !== id;
@@ -50,5 +76,5 @@ export const useTaskList = () => {
     localStorage.setItem("@Task", JSON.stringify(filterTask));
   };
 
-  return { loadTask, onSubmitTask, deleteTask };
+  return { loadTask, onSubmitTask, onSubmitUpdateTask, deleteTask };
 };
