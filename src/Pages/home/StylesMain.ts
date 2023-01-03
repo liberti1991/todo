@@ -20,7 +20,7 @@ export const ContainerMain = styled.div`
       }
 
       :last-child {
-        max-height: 300px;
+        height: calc(100vh - 400px);
         overflow: auto;
       }
     }
