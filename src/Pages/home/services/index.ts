@@ -1,15 +1,28 @@
 import { toast } from "react-toastify";
 import { v4 as uuid } from "uuid";
+import { UseLoading } from "../../../context/loading";
 
-import { IDeleteTask, ILoadTask, IOnSubmitTask, IOnSubmitUpdateTask } from "../interfaceTask";
+import {
+  IDeleteTask,
+  ILoadTask,
+  IOnSubmitTask,
+  IOnSubmitUpdateTask,
+  ITask,
+} from "../interfaceTask";
 
 export const useTaskList = () => {
+  const { startLoading, stopLoading } = UseLoading();
+
   const loadTask = ({ taskSet }: ILoadTask) => {
-    const myTask: any = localStorage.getItem("@Task");
+    startLoading();
+
+    const myTask = localStorage.getItem("@Task");
 
     if (myTask === null) {
+      stopLoading();
       return taskSet([]);
     } else {
+      stopLoading();
       taskSet(JSON.parse(myTask));
     }
   };
@@ -22,16 +35,19 @@ export const useTaskList = () => {
       description: data.description,
     };
 
-    const myTask: any = localStorage.getItem("@Task");
+    const myTask: string | null = localStorage.getItem("@Task");
 
-    let savedTask = JSON.parse(myTask) || [];
+    let savedTask: ITask[] = [];
+    if (myTask) {
+      savedTask = JSON.parse(myTask) || [];
+    }
 
     const sendTask = [...savedTask, newTask];
 
     localStorage.setItem("@Task", JSON.stringify(sendTask));
     taskSet([...savedTask, newTask]);
 
-    toast.success("Tarefa criada com sucesso!");
+    toast.success("Task created successfully!");
 
     reset();
   };
@@ -43,23 +59,28 @@ export const useTaskList = () => {
     captureTask,
     funcClose,
   }: IOnSubmitUpdateTask) => {
+    startLoading();
     const updateTaskItems = {
       id: captureTask!.id,
       title: data.title,
       description: data.description,
     };
 
-    const filterTaskItems = task.filter((item) => {
-      return item.id !== captureTask!.id;
+    const indexArrayTask = task.findIndex((item) => {
+      return item.id === captureTask!.id;
     });
 
-    const sendTask = [...filterTaskItems, updateTaskItems];
-    localStorage.setItem("@Task", JSON.stringify(sendTask));
+    if (indexArrayTask !== -1) {
+      task[indexArrayTask] = { ...task[indexArrayTask], ...updateTaskItems };
+    }
 
-    taskSet([...filterTaskItems, updateTaskItems]);
+    localStorage.setItem("@Task", JSON.stringify(task));
 
-    toast.success("Tarefa atualizada com sucesso!");
+    taskSet(task);
+
+    toast.success("Task successfully updated!");
     funcClose();
+    stopLoading();
   };
 
   const deleteTask = ({ id, task, taskSet }: IDeleteTask) => {
@@ -69,7 +90,7 @@ export const useTaskList = () => {
 
     taskSet(filterTask);
 
-    toast.warn("Tarefa Removida com Sucesso!", {
+    toast.warn("Task removed successfully!", {
       icon: "☢️",
     });
 

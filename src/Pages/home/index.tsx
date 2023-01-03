@@ -39,7 +39,7 @@ export const Home = () => {
     <ContainerMain>
       <section>
         <div>
-          <h2>O que você vai fazer?</h2>
+          <h2>Add a task!</h2>
 
           <form
             onSubmit={handleSubmit((data) => {
@@ -47,8 +47,8 @@ export const Home = () => {
             })}
           >
             <ContainerInput>
-              <input id="title" placeholder="Título da tarefa" {...register("title")} />
-              <label htmlFor="title">Título:</label>
+              <input id="title" placeholder="Ex. Task title" {...register("title")} />
+              <label htmlFor="title">title</label>
               <span>{errors?.title?.message}</span>
             </ContainerInput>
 
@@ -56,21 +56,21 @@ export const Home = () => {
               <textarea
                 id="description"
                 rows={4}
-                placeholder="Descrição da tarefa"
+                placeholder="Ex. Task description"
                 {...register("description")}
               />
-              <label htmlFor="description">Descrição:</label>
+              <label htmlFor="description">Description:</label>
               <span>{errors?.description?.message}</span>
             </ContainerInput>
 
-            <InputSubmit type="submit" value="Criar Tarefa" />
+            <InputSubmit type="submit" value="Create Task" />
           </form>
         </div>
 
         <div>
-          <h4>Lista de Tarefas</h4>
+          <h4>Task List</h4>
 
-          {task.length === 0 && <p>Não tem tarefas cadastradas</p>}
+          {task.length === 0 && <p>No tasks registered!</p>}
 
           {task.map((item) => (
             <ContainerTaskList key={item.id}>
