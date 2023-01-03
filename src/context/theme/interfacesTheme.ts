@@ -1,12 +1,11 @@
 // -----Theme-----
 export interface ITheme {
   title: string;
-  border: string;
   colors: {
     primary: string;
-    bottom: string;
+    color: string;
     header: string;
-    opacityHeader: string;
+    background: string;
   };
 }
 

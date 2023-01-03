@@ -1,9 +1,12 @@
 import styled from "styled-components";
 
 export const ContainerHeader = styled.header`
-  background-color: #000;
-  /* color: #61dafb; */
-  color: ${(props) => props.theme.colors.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: ${(props) => props.theme.colors.header};
+  color: ${(props) => props.theme.colors.color};
   text-align: center;
   padding: 1em;
 `;

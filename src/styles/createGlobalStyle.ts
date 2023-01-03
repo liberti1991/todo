@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
   html, body, #root {
     max-height: 100vh;
-    background: #f4f6f9;
+    background: ${(props) => props.theme.colors.background};
   }
 
   *, button, input {

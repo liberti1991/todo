@@ -14,8 +14,6 @@ function App() {
   const { theme } = UseTheme();
   const { loading } = UseLoading();
 
-  console.log(theme);
-
   return (
     <ThemeProvider theme={theme}>
       <CreateGlobalStyle />

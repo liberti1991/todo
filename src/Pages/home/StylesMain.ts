@@ -15,7 +15,7 @@ export const ContainerMain = styled.div`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
     h4 {
-      border-bottom: 1px solid #d4d4d4;
+      border-bottom: 1px solid #363636;
       margin-bottom: 6px;
     }
   }
@@ -63,7 +63,7 @@ export const ContainerInput = styled.div`
     }
 
     :focus {
-      border-color: #61dafb;
+      border-color: ${(props) => props.theme.colors.color};
     }
   }
 
@@ -74,10 +74,10 @@ export const ContainerInput = styled.div`
 `;
 
 export const InputSubmit = styled.input`
-  border: 1px solid #61dafb;
-  background-color: #61dafb;
+  border: 1px solid ${(props) => props.theme.colors.color};
+  background-color: ${(props) => props.theme.colors.color};
   width: 100%;
-  color: 0.5;
+  color: ${(props) => props.theme.colors.primary};
   cursor: pointer;
   transition: 0.5s;
   border-radius: 5px;
@@ -88,6 +88,7 @@ export const InputSubmit = styled.input`
   :hover {
     background-color: #fff;
     border-color: #282c34;
+    color: #000;
   }
 `;
 
@@ -96,7 +97,7 @@ export const ContainerTaskList = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 10px 5px;
-  border-bottom: 1px solid #d4d4d4;
+  border-bottom: 1px solid #c0c0c0;
   margin-bottom: 5px;
 
   > p {
@@ -118,7 +119,7 @@ export const ContainerTaskList = styled.div`
       height: 25px;
 
       :hover {
-        color: #61dafb;
+        color: ${(props) => props.theme.colors.color};
       }
     }
   }
