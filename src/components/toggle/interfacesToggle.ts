@@ -12,7 +12,7 @@ export const ToggleBtn = styled.div`
     font-size: 8px;
     display: inline-block;
     width: 40px;
-    height: 10px;
+    height: 15px;
     background-color: #e7e2cd;
     border-radius: 30px;
     position: relative;
@@ -29,7 +29,7 @@ export const ToggleBtn = styled.div`
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
     position: absolute;
-    top: -8px;
+    top: -5px;
     left: 0;
     line-height: 0;
     display: grid;
