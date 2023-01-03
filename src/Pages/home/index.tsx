@@ -67,9 +67,9 @@ export const Home = () => {
           </form>
         </div>
 
-        <div>
-          <h4>Task List</h4>
+        <h4>Task List</h4>
 
+        <div>
           {task.length === 0 && <p>No tasks registered!</p>}
 
           {task.map((item) => (

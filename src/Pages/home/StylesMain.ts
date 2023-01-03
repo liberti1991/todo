@@ -14,9 +14,15 @@ export const ContainerMain = styled.div`
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    h4 {
-      border-bottom: 1px solid #363636;
-      margin-bottom: 6px;
+    > div {
+      > h4 {
+        position: fixed;
+      }
+
+      :last-child {
+        max-height: 300px;
+        overflow: auto;
+      }
     }
   }
 `;
@@ -98,7 +104,7 @@ export const ContainerTaskList = styled.div`
   justify-content: space-between;
   padding: 0 10px 5px;
   border-bottom: 1px solid #c0c0c0;
-  margin-bottom: 5px;
+  margin: 5px 0;
 
   > p {
     font-size: 14px;
